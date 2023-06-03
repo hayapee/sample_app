@@ -16,6 +16,13 @@ User.create!(name: 'Example User',
                password_confirmation: password)
 end
 
+# ユーザーフォローのリレーションシップを作成する
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
 # ユーザーの一部を対象にマイクロポストを生成する
 users = User.order(:created_at).take(6)
 50.times do
