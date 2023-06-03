@@ -49,7 +49,6 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
-
   # ユーザーをフォローする
   def follow(other_user)
     following << other_user unless self == other_user

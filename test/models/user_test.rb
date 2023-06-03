@@ -86,6 +86,11 @@ class UserTest < ActiveSupport::TestCase
     # フォローしていないユーザーの投稿を確認
     archer.microposts.each do |post_unfollowed|
       assert_not michael.feed.include?(post_unfollowed)
+  test 'associated microposts should be destroyed' do
+    @user.save
+    @user.microposts.create!(content: 'Lorem ipsum')
+    assert_difference 'Micropost.count', -1 do
+      @user.destroy
     end
   end
 end
